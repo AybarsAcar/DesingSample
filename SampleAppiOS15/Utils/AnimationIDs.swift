@@ -10,11 +10,11 @@ import Foundation
 struct AnimationID {
   private init() { }
   
-  static let titleID: String = "title_id"
-  static let subtitleID: String = "subtitle_id"
-  static let backgroundID: String = "background_id"
-  static let textID: String = "text_id"
-  static let maskID: String = "mask_id"
-  static let imageID: String = "image_id"
-  static let blurID: String = "blur_card_id"
+  static func titleID(for id: String) -> String { return "title_id\(id)" }
+  static func subtitleID(for id: String) -> String { return "subtitle_id\(id)" }
+  static func backgroundID(for id: String) -> String { return "background_id\(id)" }
+  static func textID(for id: String) -> String { return "text_id\(id)" }
+  static func maskID(for id: String) -> String { return "mask_id\(id)" }
+  static func imageID(for id: String) -> String { return "image_id\(id)" }
+  static func blurID(for id: String) -> String { return "blur_id\(id)" }
 }

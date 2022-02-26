@@ -23,6 +23,7 @@
 		00B3C04727C9E1040009A5F0 /* CourseItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B3C04627C9E1040009A5F0 /* CourseItem.swift */; };
 		00B3C04927C9E2080009A5F0 /* CourseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B3C04827C9E2080009A5F0 /* CourseView.swift */; };
 		00B3C04C27C9E2DC0009A5F0 /* AnimationIDs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B3C04B27C9E2DC0009A5F0 /* AnimationIDs.swift */; };
+		00B3C04E27CA1A970009A5F0 /* Animation+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B3C04D27CA1A970009A5F0 /* Animation+Extensions.swift */; };
 		00BC9AD627C9879A00560566 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BC9AD527C9879A00560566 /* TabBar.swift */; };
 		00BC9AD827C98B0300560566 /* Tab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BC9AD727C98B0300560566 /* Tab.swift */; };
 		00BC9ADA27C99E0600560566 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BC9AD927C99E0600560566 /* HomeView.swift */; };
@@ -48,6 +49,7 @@
 		00B3C04627C9E1040009A5F0 /* CourseItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseItem.swift; sourceTree = "<group>"; };
 		00B3C04827C9E2080009A5F0 /* CourseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CourseView.swift; sourceTree = "<group>"; };
 		00B3C04B27C9E2DC0009A5F0 /* AnimationIDs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationIDs.swift; sourceTree = "<group>"; };
+		00B3C04D27CA1A970009A5F0 /* Animation+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Animation+Extensions.swift"; sourceTree = "<group>"; };
 		00BC9AD527C9879A00560566 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		00BC9AD727C98B0300560566 /* Tab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tab.swift; sourceTree = "<group>"; };
 		00BC9AD927C99E0600560566 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -111,6 +113,7 @@
 		001337DB27C76DC200537C68 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				00B3C04D27CA1A970009A5F0 /* Animation+Extensions.swift */,
 				001337DC27C76DCE00537C68 /* Color+Extensions.swift */,
 			);
 			path = Extensions;
@@ -244,6 +247,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00B3C04E27CA1A970009A5F0 /* Animation+Extensions.swift in Sources */,
 				00BC9AD627C9879A00560566 /* TabBar.swift in Sources */,
 				001337D027C76C7D00537C68 /* ContentView.swift in Sources */,
 				001337CE27C76C7D00537C68 /* SampleAppiOS15App.swift in Sources */,

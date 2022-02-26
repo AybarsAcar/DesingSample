@@ -15,7 +15,9 @@ struct HomeView: View {
   
   // transition animation variables
   @Namespace private var namespace
-  @State var show: Bool = false
+  @State private var show: Bool = false
+  
+  @State private var selectedID: UUID = UUID()
   
   
   var body: some View {
@@ -25,36 +27,37 @@ struct HomeView: View {
       Color.background.ignoresSafeArea()
       
       // content
-      if !show {
-        ScrollView {
-          scrollDetection
-          
-          featuredItemsSection
-          
-          Text("Courses".uppercased())
-            .font(.footnote.weight(.semibold))
-            .foregroundColor(.secondary)
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.horizontal, 20)
-          
-          CourseItem(namespace: namespace, show: $show)
-            .onTapGesture {
-              withAnimation(.spring(response: 0.6, dampingFraction: 0.8)) {
-                show.toggle()
-              }
-            }
+      
+      ScrollView(.vertical, showsIndicators: false) {
+        scrollDetection
+        
+        featuredItemsSection
+        
+        Text("Courses".uppercased())
+          .font(.footnote.weight(.semibold))
+          .foregroundColor(.secondary)
+          .frame(maxWidth: .infinity, alignment: .leading)
+          .padding(.horizontal, 20)
+        
+        if !show {
+          cards
         }
-        .coordinateSpace(name: coordinateSpaceName)
-        .safeAreaInset(edge: .top) {
-          Color.clear.frame(height: 70)
+        else {
+          // replaces the card as we go onto the detail view
+          // this is like a placeholder view - so the scrollview stays in its place
+          cardPlaceholders
         }
-        .overlay(
-          NavigationBar(title: "Featured", hasScrolled: $hasScrolled)
-        )
       }
+      .coordinateSpace(name: coordinateSpaceName)
+      .safeAreaInset(edge: .top) {
+        Color.clear.frame(height: 70)
+      }
+      .overlay(
+        NavigationBar(title: "Featured", hasScrolled: $hasScrolled)
+      )
       
       if show{
-        CourseView(namespace: namespace, show: $show)
+        courseDetails
       }
     }
   }
@@ -79,7 +82,7 @@ extension HomeView {
   
   private var featuredItemsSection: some View {
     TabView {
-      ForEach(courses) { course in
+      ForEach(featuredCourses) { course in
         
         GeometryReader { proxy in
           
@@ -107,6 +110,45 @@ extension HomeView {
     .background(
       Image("Blob 1").offset(x: 250, y: -100)
     )
+  }
+  
+  private var cards: some View {
+    ForEach(courses) { item in
+      CourseItem(course: item, namespace: namespace, show: $show)
+        .onTapGesture {
+          withAnimation(.openCard) {
+            show.toggle()
+            selectedID = item.id
+          }
+        }
+    }
+  }
+  
+  private var cardPlaceholders: some View {
+    ForEach(courses) { _ in
+      Rectangle()
+        .fill(.white)
+        .frame(height: 300)
+        .cornerRadius(30)
+        .shadow(color: .shadow, radius: 20, x: 0, y: 10)
+        .opacity(0.3)
+        .padding(.horizontal, 30)
+    }
+  }
+  
+  private var courseDetails: some View {
+    ForEach(courses) { item in
+      if item.id == selectedID {
+        CourseView(course: item, namespace: namespace, show: $show)
+          .zIndex(1)
+          .transition(
+            .asymmetric(
+              insertion: .opacity.animation(.easeInOut(duration: 0.1)),
+              removal: .opacity.animation(.easeInOut(duration: 0.3).delay(0.2))
+            )
+          )
+      }
+    }
   }
 }
 
