@@ -8,11 +8,14 @@
 import SwiftUI
 
 struct FeaturedItem: View {
+  
+  let course: Course
+  
   var body: some View {
     VStack(alignment: .leading, spacing: 8.0) {
       Spacer()
       
-      Image("Logo 2")
+      Image(course.logo)
         .resizable()
         .scaledToFit()
         .frame(width: 26, height: 26)
@@ -21,17 +24,17 @@ struct FeaturedItem: View {
         .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
         .withStrokeStyle(cornerRadius: 16)
       
-      Text("SwiftUI for iOS 15")
+      Text(course.title)
         .font(.largeTitle)
         .fontWeight(.bold)
         .foregroundStyle(.linearGradient(colors: [.primary, .primary.opacity(0.5)], startPoint: .topLeading, endPoint: .bottomTrailing))
       
-      Text("20 sections - 3 hours".uppercased())
+      Text(course.subtitle.uppercased())
         .font(.footnote)
         .fontWeight(.semibold)
         .foregroundStyle(.secondary)
       
-      Text("Build and iOS app for iOS 15 with custom layouts, animations and ...")
+      Text(course.text)
         .font(.footnote)
         .multilineTextAlignment(.leading)
         .lineLimit(2)
@@ -41,23 +44,25 @@ struct FeaturedItem: View {
     .padding(20)
     .padding(.vertical, 20)
     .frame(height: 350)
-    .background(.ultraThinMaterial, in : RoundedRectangle(cornerRadius: 30, style: .continuous))
-    .shadow(color: .shadow.opacity(0.3), radius: 10, x: 0, y: 10)
+    .background(.ultraThinMaterial)
+    .mask {
+      RoundedRectangle(cornerRadius: 30, style: .continuous)
+    }
     .withStrokeStyle()
     .padding(.horizontal, 20)
-    .background(Image("Blob 1").offset(x: 250, y: -100))
-    .overlay(
-      Image("Illustration 5")
-        .resizable()
-        .scaledToFit()
-        .frame(height: 230)
-        .offset(x: 32, y: -80)
-    )
   }
 }
 
 struct FeaturedItem_Previews: PreviewProvider {
   static var previews: some View {
-    FeaturedItem()
+    Group{
+      FeaturedItem(course: courses[0])
+      FeaturedItem(course: courses[1])
+        .preferredColorScheme(.dark)
+    }
+    .background(Image("Blob 1").offset(x: 250, y: -100))
+    .previewLayout(.sizeThatFits)
+    .shadow(color: .shadow.opacity(0.3), radius: 10, x: 0, y: 10)
+    .padding(.vertical, 40)
   }
 }
