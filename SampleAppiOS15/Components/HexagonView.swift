@@ -8,6 +8,13 @@
 import SwiftUI
 
 struct HexagonView: View {
+  
+  let colors: [Color]
+  
+  init(colors: [Color] = [.pink, .blue]) {
+    self.colors = colors
+  }
+  
   var body: some View {
     
     Canvas { context, size in
@@ -17,7 +24,7 @@ struct HexagonView: View {
       context.draw(Image(systemName: "hexagon.fill"), in: CGRect(x: 0, y: 0, width: size.width, height: size.height))
     }
     .frame(width: 200, height: 212, alignment: .center)
-    .foregroundStyle(.linearGradient(colors: [.pink, .blue], startPoint: .topLeading, endPoint: .bottomTrailing))
+    .foregroundStyle(.linearGradient(colors: colors, startPoint: .topLeading, endPoint: .bottomTrailing))
   }
 }
 

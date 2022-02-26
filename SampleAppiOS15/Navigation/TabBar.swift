@@ -9,47 +9,25 @@ import SwiftUI
 
 struct TabBar: View {
   
-  @State private var selectedTab: Tab = .home
+  @Binding var selectedTab: Tab
   @State private var tabBarBgColor: Color = .teal
   
   @State private var tabItemWidth: CGFloat = 0
   
   var body: some View {
     
-    ZStack(alignment: .bottom) {
-      
-      Group {
-        switch selectedTab {
-        case .home:
-          ContentView()
-          
-        case .explore:
-          AccountView()
-
-        case .notifications:
-          Text("NOTIFICATIONS")
-
-        case .library:
-          Text("LIBRARY")
-        }
-      }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-
-     
-
-      HStack {
-        tabButtons
-      }
-      .padding(.horizontal, 8)
-      .padding(.top, 14)
-      .frame(height: 88, alignment: .top)
-      .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 34, style: .continuous))
-      .background(tabBarBg)
-      .overlay(tabBarOverlay)
-      .withStrokeStyle()
-      .frame(maxHeight: .infinity, alignment: .bottom)
-      .ignoresSafeArea()
+    HStack {
+      tabButtons
     }
+    .padding(.horizontal, 8)
+    .padding(.top, 14)
+    .frame(height: 88, alignment: .top)
+    .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 34, style: .continuous))
+    .background(tabBarBg)
+    .overlay(tabBarOverlay)
+    .withStrokeStyle()
+    .frame(maxHeight: .infinity, alignment: .bottom)
+    .ignoresSafeArea()
   }
 }
 
@@ -150,6 +128,6 @@ extension TabBar {
 
 struct TabBar_Previews: PreviewProvider {
   static var previews: some View {
-    TabBar()
+    TabBar(selectedTab: .constant(.home))
   }
 }

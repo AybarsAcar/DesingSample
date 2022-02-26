@@ -40,7 +40,7 @@ extension AccountView {
         .padding()
         .background(Circle().fill(.ultraThinMaterial))
         .background(
-          HexagonView()
+          HexagonView(colors: [.teal, .pink])
             .offset(x: -50, y: -100)
         )
         .background(
