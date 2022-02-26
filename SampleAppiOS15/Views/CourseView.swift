@@ -51,73 +51,89 @@ struct CourseView: View {
 extension CourseView {
   
   private var cover: some View {
-    VStack {
-      Spacer()
-    }
-    .frame(maxWidth: .infinity)
-    .frame(height: 500)
-    .foregroundStyle(.black)
-    .background(
-      Image(course.image)
-        .resizable()
-        .scaledToFit()
-        .matchedGeometryEffect(id: AnimationID.imageID(for: course.id.uuidString), in: namespace)
-    )
-    .padding(20)
-    .background(
-      Image(course.background)
-        .resizable()
-        .scaledToFill()
-        .matchedGeometryEffect(id: AnimationID.backgroundID(for: course.id.uuidString), in: namespace)
-    )
-    .mask(
-      RoundedRectangle(cornerRadius: 30, style: .continuous)
-        .matchedGeometryEffect(id: AnimationID.maskID(for: course.id.uuidString), in: namespace)
-    )
-    .overlay(
-      VStack(alignment: .leading, spacing: 12) {
-        
-        Text(course.title)
-          .font(.largeTitle.weight(.bold))
-          .matchedGeometryEffect(id: AnimationID.titleID(for: course.id.uuidString), in: namespace)
-          .frame(maxWidth: .infinity, alignment: .leading)
-        
-        Text(course.subtitle.uppercased())
-          .font(.footnote.weight(.semibold))
-          .matchedGeometryEffect(id: AnimationID.subtitleID(for: course.id.uuidString), in: namespace)
-        
-        Text(course.text)
-          .font(.footnote)
-          .matchedGeometryEffect(id: AnimationID.textID(for: course.id.uuidString), in: namespace)
-        
-        Divider()
-          .opacity(appear[0] ? 1 : 0)
-        
-        HStack {
-          Image("Avatar Default")
-            .resizable()
-            .frame(width: 26, height: 26)
-            .cornerRadius(10)
-            .padding(8)
-            .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 18, style: .continuous))
-            .withStrokeStyle(cornerRadius: 18)
-          
-          Text("Taught by Aybars Acar")
-            .font(.footnote)
-        }
-        .opacity(appear[1] ? 1 : 0)
-      }
-        .padding(20)
-        .background(
-          Rectangle()
-            .fill(.ultraThinMaterial)
-            .mask(RoundedRectangle(cornerRadius: 30, style: .continuous))
-            .matchedGeometryEffect(id: AnimationID.blurID(for: course.id.uuidString), in: namespace)
-        )
-        .offset(x: 0, y: 250)
-        .padding(20)
+    GeometryReader { proxy in
       
-    )
+      let scrollY = proxy.frame(in: .global).minY
+      
+      VStack {
+        Spacer()
+      }
+      .frame(maxWidth: .infinity)
+      .frame(height: scrollY > 0 ? 500 + scrollY : 500)
+      .foregroundStyle(.black)
+      .background(
+        Image(course.image)
+          .resizable()
+          .scaledToFit()
+          .matchedGeometryEffect(id: AnimationID.imageID(for: course.id.uuidString), in: namespace)
+          .offset(y: scrollY > 0 ? scrollY * -0.8 : 0)
+      )
+      .padding(20)
+      .background(
+        Image(course.background)
+          .resizable()
+          .scaledToFill()
+          .matchedGeometryEffect(id: AnimationID.backgroundID(for: course.id.uuidString), in: namespace)
+          .offset(y: scrollY > 0 ? -scrollY : 0)
+          .scaleEffect(scrollY > 0 ? scrollY / 1000 + 1 : 1)
+          .blur(radius: scrollY > 0 ? scrollY / 20 : 0)
+      )
+      .mask(
+        RoundedRectangle(cornerRadius: 30, style: .continuous)
+          .matchedGeometryEffect(id: AnimationID.maskID(for: course.id.uuidString), in: namespace)
+          .offset(y: scrollY > 0 ? -scrollY : 0)
+      )
+      .overlay(
+        overlayContent
+          .offset(y: scrollY > 0 ? scrollY * -0.6 : 0)
+      )
+    }
+    .frame(height: 500)
+  }
+  
+  private var overlayContent: some View {
+    VStack(alignment: .leading, spacing: 12) {
+      
+      Text(course.title)
+        .font(.largeTitle.weight(.bold))
+        .matchedGeometryEffect(id: AnimationID.titleID(for: course.id.uuidString), in: namespace)
+        .frame(maxWidth: .infinity, alignment: .leading)
+      
+      Text(course.subtitle.uppercased())
+        .font(.footnote.weight(.semibold))
+        .matchedGeometryEffect(id: AnimationID.subtitleID(for: course.id.uuidString), in: namespace)
+      
+      Text(course.text)
+        .font(.footnote)
+        .matchedGeometryEffect(id: AnimationID.textID(for: course.id.uuidString), in: namespace)
+      
+      Divider()
+        .opacity(appear[0] ? 1 : 0)
+      
+      HStack {
+        Image("Avatar Default")
+          .resizable()
+          .frame(width: 26, height: 26)
+          .cornerRadius(10)
+          .padding(8)
+          .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 18, style: .continuous))
+          .withStrokeStyle(cornerRadius: 18)
+        
+        Text("Taught by Aybars Acar")
+          .font(.footnote)
+      }
+      .opacity(appear[1] ? 1 : 0)
+    }
+      .padding(20)
+      .background(
+        Rectangle()
+          .fill(.ultraThinMaterial)
+          .mask(RoundedRectangle(cornerRadius: 30, style: .continuous))
+          .matchedGeometryEffect(id: AnimationID.blurID(for: course.id.uuidString), in: namespace)
+      )
+      .offset(x: 0, y: 250)
+      .padding(20)
+    
   }
   
   private var closeButton: some View {
