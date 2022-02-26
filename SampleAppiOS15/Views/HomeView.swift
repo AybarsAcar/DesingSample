@@ -9,6 +9,8 @@ import SwiftUI
 
 struct HomeView: View {
   
+  @EnvironmentObject private var model: Model
+  
   private let coordinateSpaceName: String = "scroll"
   
   @State private var hasScrolled: Bool = false
@@ -27,7 +29,6 @@ struct HomeView: View {
       Color.background.ignoresSafeArea()
       
       // content
-      
       ScrollView(.vertical, showsIndicators: false) {
         scrollDetection
         
@@ -118,6 +119,7 @@ extension HomeView {
         .onTapGesture {
           withAnimation(.openCard) {
             show.toggle()
+            model.showDetail.toggle()
             selectedID = item.id
           }
         }
@@ -155,5 +157,6 @@ extension HomeView {
 struct HomeView_Previews: PreviewProvider {
   static var previews: some View {
     HomeView()
+      .environmentObject(Model())
   }
 }

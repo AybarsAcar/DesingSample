@@ -9,6 +9,8 @@ import SwiftUI
 
 struct CourseView: View {
   
+  @EnvironmentObject private var model: Model
+  
   let course: Course
   
   // animation variables
@@ -123,6 +125,7 @@ extension CourseView {
     Button {
       withAnimation(.closeCard) {
         show.toggle()
+        model.showDetail.toggle()
       }
     } label: {
       Image(systemName: "xmark")
@@ -172,5 +175,6 @@ struct CourseView_Previews: PreviewProvider {
   @Namespace static var namespace
   static var previews: some View {
     CourseView(course: courses[0],namespace: namespace, show: .constant(true))
+      .environmentObject(Model())
   }
 }
