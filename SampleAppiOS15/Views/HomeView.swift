@@ -40,14 +40,19 @@ struct HomeView: View {
           .frame(maxWidth: .infinity, alignment: .leading)
           .padding(.horizontal, 20)
         
-        if !show {
-          cards
+        
+        LazyVGrid(columns: [GridItem(.adaptive(minimum: 300), spacing: 20)], spacing: 20) {
+          if !show {
+            cards
+          }
+          else {
+            // replaces the card as we go onto the detail view
+            // this is like a placeholder view - so the scrollview stays in its place
+            cardPlaceholders
+          }
         }
-        else {
-          // replaces the card as we go onto the detail view
-          // this is like a placeholder view - so the scrollview stays in its place
-          cardPlaceholders
-        }
+        .padding(.horizontal, 30)
+        
       }
       .coordinateSpace(name: coordinateSpaceName)
       .safeAreaInset(edge: .top) {
@@ -90,6 +95,8 @@ extension HomeView {
           let minX = proxy.frame(in: .global).minX
           
           FeaturedItem(course: course)
+            .frame(maxWidth: 500)
+            .frame(maxWidth: .infinity)
             .padding(.vertical, 40)
             .rotation3DEffect(.degrees(minX / -20), axis: (x: 0, y: 1, z: 0))
             .shadow(color: .shadow.opacity(0.3), radius: 10, x: 0, y: 10)

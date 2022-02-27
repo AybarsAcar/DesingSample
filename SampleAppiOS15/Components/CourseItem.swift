@@ -22,16 +22,16 @@ struct CourseItem: View {
       VStack(alignment: .leading, spacing: 12) {
         Text(course.title)
           .font(.largeTitle.weight(.bold))
-          .matchedGeometryEffect(id: AnimationID.titleID(for: course.id.uuidString), in: namespace)
+          .matchedGeometryEffect(id: AnimationID.configure(.titleID, for: course.id.uuidString), in: namespace)
           .frame(maxWidth: .infinity, alignment: .leading)
         
         Text(course.subtitle.uppercased())
           .font(.footnote.weight(.semibold))
-          .matchedGeometryEffect(id: AnimationID.subtitleID(for: course.id.uuidString), in: namespace)
+          .matchedGeometryEffect(id: AnimationID.configure(.subtitleID, for: course.id.uuidString), in: namespace)
         
         Text(course.text)
           .font(.footnote)
-          .matchedGeometryEffect(id: AnimationID.textID(for: course.id.uuidString), in: namespace)
+          .matchedGeometryEffect(id: AnimationID.configure(.textID, for: course.id.uuidString), in: namespace)
       }
       .padding(20)
       .background(
@@ -39,7 +39,7 @@ struct CourseItem: View {
           .fill(.ultraThinMaterial)
           .mask(RoundedRectangle(cornerRadius: 30, style: .continuous))
           .blur(radius: 30)
-          .matchedGeometryEffect(id: AnimationID.blurID(for: course.id.uuidString), in: namespace)
+          .matchedGeometryEffect(id: AnimationID.configure(.blurID, for: course.id.uuidString), in: namespace)
       )
       
     }
@@ -48,20 +48,20 @@ struct CourseItem: View {
       Image(course.image)
         .resizable()
         .scaledToFit()
-        .matchedGeometryEffect(id: AnimationID.imageID(for: course.id.uuidString), in: namespace)
+        .padding(20)
+        .matchedGeometryEffect(id: AnimationID.configure(.imageID, for: course.id.uuidString), in: namespace)
     )
     .background(
       Image(course.background)
         .resizable()
         .scaledToFill()
-        .matchedGeometryEffect(id: AnimationID.backgroundID(for: course.id.uuidString), in: namespace)
+        .matchedGeometryEffect(id: AnimationID.configure(.backgroundID, for: course.id.uuidString), in: namespace)
     )
     .mask(
       RoundedRectangle(cornerRadius: 30, style: .continuous)
-        .matchedGeometryEffect(id: AnimationID.maskID(for: course.id.uuidString), in: namespace)
+        .matchedGeometryEffect(id: AnimationID.configure(.maskID, for: course.id.uuidString), in: namespace)
     )
     .frame(height: 300)
-    .padding(20)
   }
 }
 

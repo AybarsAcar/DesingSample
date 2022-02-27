@@ -20,6 +20,10 @@ struct CourseView: View {
   // used for chaining animations
   @State private var appear: [Bool] = [false, false, false]
   
+  @State private var viewState: CGSize = .zero
+  
+  @State private var isDraggable: Bool = true
+  
   
   var body: some View {
     
@@ -33,6 +37,12 @@ struct CourseView: View {
           .opacity(appear[2] ? 1 : 0)
       }
       .background(Color.background)
+      .mask(RoundedRectangle(cornerRadius: viewState.width / 3, style: .continuous))
+      .shadow(color: .black.opacity(0.3), radius: 30, x: 0, y: 10)
+      .scaleEffect(viewState.width / -500 + 1)
+      .background(.black.opacity(viewState.width / 500))
+      .background(.ultraThinMaterial)
+      .gesture(isDraggable ? dragGesture : nil)
       
       closeButton
     }
@@ -65,7 +75,9 @@ extension CourseView {
         Image(course.image)
           .resizable()
           .scaledToFit()
-          .matchedGeometryEffect(id: AnimationID.imageID(for: course.id.uuidString), in: namespace)
+          .padding(20)
+          .frame(maxWidth: 500)
+          .matchedGeometryEffect(id: AnimationID.configure(.imageID, for: course.id.uuidString), in: namespace)
           .offset(y: scrollY > 0 ? scrollY * -0.8 : 0)
       )
       .padding(20)
@@ -73,14 +85,14 @@ extension CourseView {
         Image(course.background)
           .resizable()
           .scaledToFill()
-          .matchedGeometryEffect(id: AnimationID.backgroundID(for: course.id.uuidString), in: namespace)
+          .matchedGeometryEffect(id: AnimationID.configure(.backgroundID, for: course.id.uuidString), in: namespace)
           .offset(y: scrollY > 0 ? -scrollY : 0)
           .scaleEffect(scrollY > 0 ? scrollY / 1000 + 1 : 1)
           .blur(radius: scrollY > 0 ? scrollY / 20 : 0)
       )
       .mask(
-        RoundedRectangle(cornerRadius: 30, style: .continuous)
-          .matchedGeometryEffect(id: AnimationID.maskID(for: course.id.uuidString), in: namespace)
+        RoundedRectangle(cornerRadius: appear[0] ? 0 : 30, style: .continuous)
+          .matchedGeometryEffect(id: AnimationID.configure(.maskID, for: course.id.uuidString), in: namespace)
           .offset(y: scrollY > 0 ? -scrollY : 0)
       )
       .overlay(
@@ -96,16 +108,16 @@ extension CourseView {
       
       Text(course.title)
         .font(.largeTitle.weight(.bold))
-        .matchedGeometryEffect(id: AnimationID.titleID(for: course.id.uuidString), in: namespace)
+        .matchedGeometryEffect(id: AnimationID.configure(.titleID, for: course.id.uuidString), in: namespace)
         .frame(maxWidth: .infinity, alignment: .leading)
       
       Text(course.subtitle.uppercased())
         .font(.footnote.weight(.semibold))
-        .matchedGeometryEffect(id: AnimationID.subtitleID(for: course.id.uuidString), in: namespace)
+        .matchedGeometryEffect(id: AnimationID.configure(.subtitleID, for: course.id.uuidString), in: namespace)
       
       Text(course.text)
         .font(.footnote)
-        .matchedGeometryEffect(id: AnimationID.textID(for: course.id.uuidString), in: namespace)
+        .matchedGeometryEffect(id: AnimationID.configure(.textID, for: course.id.uuidString), in: namespace)
       
       Divider()
         .opacity(appear[0] ? 1 : 0)
@@ -129,7 +141,7 @@ extension CourseView {
         Rectangle()
           .fill(.ultraThinMaterial)
           .mask(RoundedRectangle(cornerRadius: 30, style: .continuous))
-          .matchedGeometryEffect(id: AnimationID.blurID(for: course.id.uuidString), in: namespace)
+          .matchedGeometryEffect(id: AnimationID.configure(.blurID, for: course.id.uuidString), in: namespace)
       )
       .offset(x: 0, y: 250)
       .padding(20)
@@ -169,6 +181,37 @@ extension CourseView {
     }
     .padding(20)
   }
+  
+  private var dragGesture: some Gesture {
+    DragGesture(minimumDistance: 30, coordinateSpace: .local)
+      .onChanged { value in
+        // only allow swipe from left to right
+        // and only at the left edge
+        guard
+          value.translation.width > 0,
+          value.startLocation.x < 60
+        else { return }
+        
+        withAnimation(.closeCard) {
+          viewState = value.translation
+        }
+        
+        if viewState.width > 140 {
+          close()
+        }
+      }
+      .onEnded{ value in
+        if viewState.width > 100 {
+          // dismiss the view
+          close()
+        }
+        else {
+          withAnimation(.easeInOut) {
+            viewState = .zero
+          }
+        }
+      }
+  }
 }
 
 // MARK: - member functions
@@ -184,6 +227,20 @@ extension CourseView {
   
   private func fadeOut() {
     appear = appear.map { item in return false }
+  }
+  
+  private func close() {
+    // dismiss the view
+    withAnimation(.closeCard.delay(0.3)) {
+      show.toggle()
+      model.showDetail.toggle()
+    }
+    
+    withAnimation(.easeInOut) {
+      viewState = .zero
+    }
+    
+    isDraggable = false
   }
 }
 

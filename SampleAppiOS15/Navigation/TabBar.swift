@@ -16,18 +16,26 @@ struct TabBar: View {
   
   var body: some View {
     
-    HStack {
-      tabButtons
-    }
-    .padding(.horizontal, 8)
-    .padding(.top, 14)
-    .frame(height: 88, alignment: .top)
-    .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 34, style: .continuous))
-    .background(tabBarBg)
-    .overlay(tabBarOverlay)
-    .withStrokeStyle()
-    .frame(maxHeight: .infinity, alignment: .bottom)
+    // TODO: there must be a better way then GeometryReader
+    GeometryReader { proxy in
+      
+      // for small screen that doesnt have safe insets
+      // we dont want corner radius for small old devices
+      let hasHomeIndicator = proxy.safeAreaInsets.bottom - 44 > 20
+      
+      HStack {
+        tabButtons
+      }
+      .padding(.horizontal, 8)
+      .padding(.top, 14)
+      .frame(height: hasHomeIndicator ? 88 : 62, alignment: .top)
+      .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: hasHomeIndicator ? 34 : 0, style: .continuous))
+      .background(tabBarBg)
+      .overlay(tabBarOverlay)
+      .withStrokeStyle(cornerRadius: hasHomeIndicator ? 34 : 0)
+      .frame(maxHeight: .infinity, alignment: .bottom)
     .ignoresSafeArea()
+    }
   }
 }
 
