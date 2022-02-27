@@ -9,6 +9,8 @@ import SwiftUI
 
 struct AccountView: View {
   
+  @Environment(\.presentationMode) private var presentationMode
+  
   @State private var isDeleted: Bool = false
   @State private var isPinned: Bool = false
   
@@ -25,6 +27,16 @@ struct AccountView: View {
       }
       .listStyle(.insetGrouped)
       .navigationTitle("Account")
+      .toolbar {
+        ToolbarItem(placement: .navigationBarLeading) {
+          Button {
+            presentationMode.wrappedValue.dismiss()
+          } label: {
+            Text("Done")
+          }
+
+        }
+      }
     }
   }
 }
