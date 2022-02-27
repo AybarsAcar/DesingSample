@@ -32,6 +32,8 @@
 		00BC9AE027C9A24300560566 /* FeaturedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BC9ADF27C9A24300560566 /* FeaturedItem.swift */; };
 		00BC9AE227C9A35600560566 /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00BC9AE127C9A35600560566 /* NavigationBar.swift */; };
 		00FA9AE527CB601A009E0B8B /* Suggestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FA9AE427CB601A009E0B8B /* Suggestion.swift */; };
+		00FA9AE727CB695B009E0B8B /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FA9AE627CB695B009E0B8B /* SignUpView.swift */; };
+		00FA9AE927CB6D2D009E0B8B /* AngularButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00FA9AE827CB6D2D009E0B8B /* AngularButtonStyle.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,6 +63,8 @@
 		00BC9ADF27C9A24300560566 /* FeaturedItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeaturedItem.swift; sourceTree = "<group>"; };
 		00BC9AE127C9A35600560566 /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
 		00FA9AE427CB601A009E0B8B /* Suggestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Suggestion.swift; sourceTree = "<group>"; };
+		00FA9AE627CB695B009E0B8B /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		00FA9AE827CB6D2D009E0B8B /* AngularButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AngularButtonStyle.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +81,7 @@
 		001337C127C76C7C00537C68 = {
 			isa = PBXGroup;
 			children = (
+				00FA9AE627CB695B009E0B8B /* SignUpView.swift */,
 				001337CC27C76C7D00537C68 /* SampleAppiOS15 */,
 				001337CB27C76C7D00537C68 /* Products */,
 			);
@@ -130,6 +135,7 @@
 			children = (
 				001337DE27C77C5500537C68 /* StrokeStyle.swift */,
 				00B3C04027C9C6060009A5F0 /* AnimatableFontModifier.swift */,
+				00FA9AE827CB6D2D009E0B8B /* AngularButtonStyle.swift */,
 			);
 			path = Styles;
 			sourceTree = "<group>";
@@ -260,8 +266,10 @@
 				00B3C04E27CA1A970009A5F0 /* Animation+Extensions.swift in Sources */,
 				00BC9AD627C9879A00560566 /* TabBar.swift in Sources */,
 				001337D027C76C7D00537C68 /* ContentView.swift in Sources */,
+				00FA9AE727CB695B009E0B8B /* SignUpView.swift in Sources */,
 				001337CE27C76C7D00537C68 /* SampleAppiOS15App.swift in Sources */,
 				003A02C427C8E23D00E4B42D /* BlobShape.swift in Sources */,
+				00FA9AE927CB6D2D009E0B8B /* AngularButtonStyle.swift in Sources */,
 				00BC9AE227C9A35600560566 /* NavigationBar.swift in Sources */,
 				001337DD27C76DCE00537C68 /* Color+Extensions.swift in Sources */,
 				00BC9ADA27C99E0600560566 /* HomeView.swift in Sources */,

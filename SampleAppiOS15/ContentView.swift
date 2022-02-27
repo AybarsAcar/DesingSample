@@ -11,6 +11,8 @@ struct ContentView: View {
   
   @EnvironmentObject private var model: Model
   
+  @AppStorage("showModal") private var showModal: Bool = false
+  
   @State private var selectedTab: Tab = .home
   
   var body: some View {
@@ -35,6 +37,31 @@ struct ContentView: View {
       
       TabBar(selectedTab: $selectedTab)
         .offset(y: model.showDetail ? 200 : 0)
+      
+      if showModal {
+        ZStack {
+          Color.clear
+            .background(.regularMaterial)
+            .ignoresSafeArea()
+          
+          SignUpView()
+          
+          Button {
+            withAnimation {
+              showModal = false
+            }
+          } label: {
+            Image(systemName: "xmark")
+              .font(.body.weight(.bold))
+              .foregroundColor(.secondary)
+              .padding(8)
+              .background(.ultraThinMaterial, in: Circle())
+          }
+          .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topTrailing)
+          .padding(20)
+        }
+        .zIndex(1)
+      }
     }
     .safeAreaInset(edge: .bottom, spacing: 0) {
       Color.clear.frame(height: 44)

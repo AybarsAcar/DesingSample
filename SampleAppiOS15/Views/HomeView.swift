@@ -21,6 +21,10 @@ struct HomeView: View {
   
   @State private var selectedID: UUID = UUID()
   
+  // to transition to featured course
+  @State private var showCourse: Bool = false
+  @State private var selectedIndex: Int = 0
+  
   
   var body: some View {
     ZStack {
@@ -88,7 +92,7 @@ extension HomeView {
   
   private var featuredItemsSection: some View {
     TabView {
-      ForEach(featuredCourses) { course in
+      ForEach(Array(featuredCourses.enumerated()), id: \.offset) { index, course in
         
         GeometryReader { proxy in
           
@@ -109,6 +113,10 @@ extension HomeView {
                 .offset(x: 32, y: -80)
                 .offset(x: minX / 3)
             )
+            .onTapGesture {
+              showCourse = true
+              selectedIndex = index
+            }
         }
         
       }
@@ -118,6 +126,9 @@ extension HomeView {
     .background(
       Image("Blob 1").offset(x: 250, y: -100)
     )
+    .sheet(isPresented: $showCourse) {
+      CourseView(course: featuredCourses[selectedIndex], namespace: namespace, show: $showCourse)
+    }
   }
   
   private var cards: some View {

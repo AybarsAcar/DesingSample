@@ -13,6 +13,10 @@ struct SearchView: View {
   
   @State private var text: String = ""
   
+  @State private var show: Bool = false
+  @State private var selectedCourse: Course? = nil
+  @Namespace private var namespace
+  
   var body: some View {
     NavigationView {
       
@@ -57,7 +61,11 @@ struct SearchView: View {
           }
         }
       }
-      
+      .sheet(isPresented: $show) {
+        if let course = selectedCourse {
+          CourseView(course: course, namespace: namespace, show: $show)
+        }
+      }
     }
   }
 }
@@ -65,29 +73,43 @@ struct SearchView: View {
 extension SearchView {
   
   private var searchContent: some View {
-    ForEach(courses.filter({ $0.title.contains(text) || text.isEmpty })) { item in
-      HStack(alignment: .top, spacing: 4) {
+    ForEach(Array(courses.enumerated()), id: \.offset) { index, item in
+      
+      if item.title.contains(text) || text.isEmpty {
         
-        Image(item.image)
-          .resizable()
-          .scaledToFill()
-          .frame(width: 44, height: 44)
-          .background(Color.background)
-          .mask(Circle())
+        if index != 0 {
+          Divider()
+        }
         
-        VStack(alignment: .leading, spacing: 4) {
-            Text(item.title)
-              .bold()
-          
-          Text(item.text)
-            .font(.footnote)
-            .foregroundColor(.secondary)
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .multilineTextAlignment(.leading)
+        Button {
+          selectedCourse = item
+          show = true
+        } label: {
+          HStack(alignment: .top, spacing: 4) {
+            
+            Image(item.image)
+              .resizable()
+              .scaledToFill()
+              .frame(width: 44, height: 44)
+              .background(Color.background)
+              .mask(Circle())
+            
+            VStack(alignment: .leading, spacing: 4) {
+                Text(item.title)
+                  .bold()
+                  .foregroundColor(.primary)
+              
+              Text(item.text)
+                .font(.footnote)
+                .foregroundColor(.secondary)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .multilineTextAlignment(.leading)
+            }
+          }
+          .padding(.vertical, 4)
+          .listRowSeparator(.hidden)
         }
       }
-      .padding(.vertical, 4)
-      .listRowSeparator(.hidden)
     }
   }
 }
