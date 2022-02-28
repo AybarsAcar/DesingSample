@@ -1,16 +1,16 @@
 //
-//  SignUpView.swift
+//  SignInView.swift
 //  SampleAppiOS15
 //
-//  Created by Aybars Acar on 27/2/2022.
+//  Created by Aybars Acar on 28/2/2022.
 //
 
 import SwiftUI
 
-struct SignUpView: View {
+struct SignInView: View {
   
   @EnvironmentObject private var model: Model
-
+  
   @State private var email: String = ""
   @State private var password: String = ""
   
@@ -24,7 +24,7 @@ struct SignUpView: View {
   
   var body: some View {
     VStack(alignment: .leading, spacing: 16) {
-      Text("Sign up")
+      Text("Sign in")
         .font(.largeTitle.bold())
       
       Text("Access 120+ hours of courses, tutorials and livestreams")
@@ -57,7 +57,7 @@ struct SignUpView: View {
       Button {
         
       } label: {
-        Text("Create an account")
+        Text("Sign in")
           .frame(maxWidth: .infinity)
           .font(.headline)
       }
@@ -66,22 +66,18 @@ struct SignUpView: View {
       .controlSize(.large)
       .shadow(color: .shadow.opacity(0.2), radius: 30, x: 0, y: 30)
 
-      Text("by clicking on *Create an account*, you agree to our **Terms of Service** and **[Privacy Policy](https://google.com)**")
-        .font(.footnote)
-        .foregroundColor(.secondary)
-        .tint(.primary.opacity(0.8))
       
       Divider()
       
       HStack {
-        Text("Already have an account?")
+        Text("Don't have an account?")
           .font(.footnote)
           .foregroundColor(.secondary)
         
         Button {
-          model.selectedModal = .signIn
+          model.selectedModal = .signUp
         } label: {
-          Text("Sign in")
+          Text("Sign up!")
             .bold()
         }
         .font(.footnote)
@@ -110,7 +106,7 @@ struct SignUpView: View {
 }
 
 // MARK: - Components
-extension SignUpView {
+extension SignInView {
   private var geometry: some View {
     GeometryReader { proxy in
       Color.clear.preference(key: CirclePreferenceKey.self, value: proxy.frame(in: .named("container")).minY)
@@ -118,16 +114,18 @@ extension SignUpView {
   }
 }
 
-extension SignUpView {
+extension SignInView {
   enum Field: Hashable {
     case email, password
   }
 }
 
-struct SignUpView_Previews: PreviewProvider {
-  static var previews: some View {
-    ZStack {
-      SignUpView()
+
+struct SignInView_Previews: PreviewProvider {
+    static var previews: some View {
+      ZStack {
+        SignInView()
+          .environmentObject(Model())
+      }
     }
-  }
 }

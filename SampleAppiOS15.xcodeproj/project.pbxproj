@@ -19,6 +19,8 @@
 		003A02C227C8E10400E4B42D /* BlobView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003A02C127C8E10400E4B42D /* BlobView.swift */; };
 		003A02C427C8E23D00E4B42D /* BlobShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003A02C327C8E23D00E4B42D /* BlobShape.swift */; };
 		00A678B927CCAB650082CBE9 /* InputStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A678B827CCAB650082CBE9 /* InputStyle.swift */; };
+		00A678BB27CCB0200082CBE9 /* ModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A678BA27CCB0200082CBE9 /* ModalView.swift */; };
+		00A678BD27CCB0C30082CBE9 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A678BC27CCB0C30082CBE9 /* SignInView.swift */; };
 		00B3C03F27C9C2F80009A5F0 /* PreferenceKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B3C03E27C9C2F80009A5F0 /* PreferenceKeys.swift */; };
 		00B3C04127C9C6060009A5F0 /* AnimatableFontModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B3C04027C9C6060009A5F0 /* AnimatableFontModifier.swift */; };
 		00B3C04327C9C9CE0009A5F0 /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B3C04227C9C9CE0009A5F0 /* Course.swift */; };
@@ -51,6 +53,8 @@
 		003A02C127C8E10400E4B42D /* BlobView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlobView.swift; sourceTree = "<group>"; };
 		003A02C327C8E23D00E4B42D /* BlobShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlobShape.swift; sourceTree = "<group>"; };
 		00A678B827CCAB650082CBE9 /* InputStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputStyle.swift; sourceTree = "<group>"; };
+		00A678BA27CCB0200082CBE9 /* ModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalView.swift; sourceTree = "<group>"; };
+		00A678BC27CCB0C30082CBE9 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		00B3C03E27C9C2F80009A5F0 /* PreferenceKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceKeys.swift; sourceTree = "<group>"; };
 		00B3C04027C9C6060009A5F0 /* AnimatableFontModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatableFontModifier.swift; sourceTree = "<group>"; };
 		00B3C04227C9C9CE0009A5F0 /* Course.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
@@ -143,6 +147,16 @@
 			path = Styles;
 			sourceTree = "<group>";
 		};
+		00A678BE27CCB5910082CBE9 /* Modals */ = {
+			isa = PBXGroup;
+			children = (
+				00A678BA27CCB0200082CBE9 /* ModalView.swift */,
+				0004C0F627CAFB31007787F6 /* SearchView.swift */,
+				00A678BC27CCB0C30082CBE9 /* SignInView.swift */,
+			);
+			path = Modals;
+			sourceTree = "<group>";
+		};
 		00B3C04A27C9E2D00009A5F0 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -164,9 +178,9 @@
 			isa = PBXGroup;
 			children = (
 				001337E127C780EF00537C68 /* AccountView.swift */,
+				00A678BE27CCB5910082CBE9 /* Modals */,
 				00BC9AD927C99E0600560566 /* HomeView.swift */,
 				00B3C04827C9E2080009A5F0 /* CourseView.swift */,
-				0004C0F627CAFB31007787F6 /* SearchView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -280,12 +294,14 @@
 				0004C0F727CAFB31007787F6 /* SearchView.swift in Sources */,
 				00B3C04327C9C9CE0009A5F0 /* Course.swift in Sources */,
 				00A678B927CCAB650082CBE9 /* InputStyle.swift in Sources */,
+				00A678BB27CCB0200082CBE9 /* ModalView.swift in Sources */,
 				00B3C04C27C9E2DC0009A5F0 /* AnimationIDs.swift in Sources */,
 				00B3C04127C9C6060009A5F0 /* AnimatableFontModifier.swift in Sources */,
 				001337E227C780EF00537C68 /* AccountView.swift in Sources */,
 				00BC9AE027C9A24300560566 /* FeaturedItem.swift in Sources */,
 				00FA9AE527CB601A009E0B8B /* Suggestion.swift in Sources */,
 				00B3C04927C9E2080009A5F0 /* CourseView.swift in Sources */,
+				00A678BD27CCB0C30082CBE9 /* SignInView.swift in Sources */,
 				00B3C04727C9E1040009A5F0 /* CourseItem.swift in Sources */,
 				00B3C03F27C9C2F80009A5F0 /* PreferenceKeys.swift in Sources */,
 				00BC9AD827C98B0300560566 /* Tab.swift in Sources */,
