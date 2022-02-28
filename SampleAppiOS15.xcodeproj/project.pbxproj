@@ -21,6 +21,7 @@
 		00A678B927CCAB650082CBE9 /* InputStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A678B827CCAB650082CBE9 /* InputStyle.swift */; };
 		00A678BB27CCB0200082CBE9 /* ModalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A678BA27CCB0200082CBE9 /* ModalView.swift */; };
 		00A678BD27CCB0C30082CBE9 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A678BC27CCB0C30082CBE9 /* SignInView.swift */; };
+		00A678C027CCB9F80082CBE9 /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A678BF27CCB9F80082CBE9 /* AvatarView.swift */; };
 		00B3C03F27C9C2F80009A5F0 /* PreferenceKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B3C03E27C9C2F80009A5F0 /* PreferenceKeys.swift */; };
 		00B3C04127C9C6060009A5F0 /* AnimatableFontModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B3C04027C9C6060009A5F0 /* AnimatableFontModifier.swift */; };
 		00B3C04327C9C9CE0009A5F0 /* Course.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00B3C04227C9C9CE0009A5F0 /* Course.swift */; };
@@ -55,6 +56,7 @@
 		00A678B827CCAB650082CBE9 /* InputStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputStyle.swift; sourceTree = "<group>"; };
 		00A678BA27CCB0200082CBE9 /* ModalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModalView.swift; sourceTree = "<group>"; };
 		00A678BC27CCB0C30082CBE9 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
+		00A678BF27CCB9F80082CBE9 /* AvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarView.swift; sourceTree = "<group>"; };
 		00B3C03E27C9C2F80009A5F0 /* PreferenceKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceKeys.swift; sourceTree = "<group>"; };
 		00B3C04027C9C6060009A5F0 /* AnimatableFontModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatableFontModifier.swift; sourceTree = "<group>"; };
 		00B3C04227C9C9CE0009A5F0 /* Course.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Course.swift; sourceTree = "<group>"; };
@@ -193,6 +195,7 @@
 				003A02BF27C8DC9500E4B42D /* HexagonView.swift */,
 				00BC9ADF27C9A24300560566 /* FeaturedItem.swift */,
 				00B3C04627C9E1040009A5F0 /* CourseItem.swift */,
+				00A678BF27CCB9F80082CBE9 /* AvatarView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -307,6 +310,7 @@
 				00BC9AD827C98B0300560566 /* Tab.swift in Sources */,
 				003A02C027C8DC9500E4B42D /* HexagonView.swift in Sources */,
 				003A02C227C8E10400E4B42D /* BlobView.swift in Sources */,
+				00A678C027CCB9F80082CBE9 /* AvatarView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
