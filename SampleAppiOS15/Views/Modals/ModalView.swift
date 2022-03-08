@@ -11,7 +11,8 @@ struct ModalView: View {
   
   @EnvironmentObject private var model: Model
   @AppStorage("showModal") private var showModal: Bool = false
-  
+  @AppStorage("isLogged") private var isLogged: Bool = false
+
   @State private var viewTranslation: CGSize = .zero
   
   @State private var isViewDismissed: Bool = false
@@ -81,6 +82,11 @@ struct ModalView: View {
       }
       withAnimation(.easeOut(duration: 1).delay(0.2)) {
         appear[2] = true
+      }
+    }
+    .onChange(of: isLogged) { value in
+      if value {
+        dismissViewWithAnimation()
       }
     }
   }

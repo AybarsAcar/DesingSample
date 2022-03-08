@@ -10,7 +10,8 @@ import SwiftUI
 struct SignInView: View {
   
   @EnvironmentObject private var model: Model
-  
+  @AppStorage("isLogged") private var isLogged: Bool = false
+
   @State private var email: String = ""
   @State private var password: String = ""
   
@@ -62,7 +63,7 @@ struct SignInView: View {
           }
         
         Button {
-          
+          isLogged = true
         } label: {
           Text("Sign in")
             .frame(maxWidth: .infinity)

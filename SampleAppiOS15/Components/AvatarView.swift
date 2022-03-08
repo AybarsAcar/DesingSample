@@ -8,25 +8,34 @@
 import SwiftUI
 
 struct AvatarView: View {
+  @AppStorage("isLogged") private var isLogged: Bool = false
+
   var body: some View {
-    AsyncImage(url: URL(string: "https://picsum.photos/200"), transaction: .init(animation: .easeInOut)) { phase in
-      
-      switch phase {
-      case .success(let image):
-        image
+    Group {
+      if isLogged {
+        AsyncImage(url: URL(string: "https://picsum.photos/200"), transaction: .init(animation: .easeInOut)) { phase in
+          
+          switch phase {
+          case .success(let image):
+            image
+              .resizable()
+              .transition(.scale(scale: 0.5, anchor: .center))
+            
+          case .empty:
+            ProgressView()
+            
+          case .failure(_):
+            Color.gray
+            
+          @unknown default:
+            EmptyView()
+          }
+          
+        }
+      } else {
+        Image("Avatar Default")
           .resizable()
-          .transition(.scale(scale: 0.5, anchor: .center))
-        
-      case .empty:
-        ProgressView()
-        
-      case .failure(_):
-        Color.gray
-        
-      @unknown default:
-        EmptyView()
       }
-      
     }
     .frame(width: 26, height: 26)
     .cornerRadius(10)

@@ -17,7 +17,9 @@ struct NavigationBar: View {
   
   // TODO: do not use AppStorage for this find a better solution
   @AppStorage("showModal") private var showModal: Bool = false
-
+  
+  @AppStorage("isLogged") private var isLogged: Bool = false
+  
   var body: some View {
     ZStack {
       // background layer
@@ -51,22 +53,26 @@ struct NavigationBar: View {
         } content: {
           SearchView()
         }
-
+        
         Button {
-//          showAccount.toggle()
-          withAnimation {
-            showModal = true
+          if isLogged {
+            showAccount.toggle()
+          } else {
+            withAnimation {
+              showModal = true
+            }
           }
+          
         } label: {
           AvatarView()
-            
+          
         }
         .sheet(isPresented: $showAccount) {
           showAccount = false
         } content: {
           AccountView()
         }
-
+        
       }
       .frame(maxWidth: .infinity, alignment: .trailing)
       .padding(.trailing, 20)

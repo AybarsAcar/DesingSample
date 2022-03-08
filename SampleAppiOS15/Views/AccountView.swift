@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct AccountView: View {
-  
-  @Environment(\.presentationMode) private var presentationMode
-  
+
+  @Environment(\.dismiss) private var dismiss
+  @AppStorage("isLogged") private var isLogged: Bool = false
+
   @State private var isDeleted: Bool = false
   @State private var isPinned: Bool = false
   
@@ -24,13 +25,21 @@ struct AccountView: View {
         
         linkSection
         
+        Button {
+          isLogged = false
+          dismiss()
+        } label: {
+          Text("Sign out")
+        }
+        .tint(.red)
+
       }
       .listStyle(.insetGrouped)
       .navigationTitle("Account")
       .toolbar {
         ToolbarItem(placement: .navigationBarLeading) {
           Button {
-            presentationMode.wrappedValue.dismiss()
+            dismiss()
           } label: {
             Text("Done")
           }
