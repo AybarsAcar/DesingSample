@@ -1,5 +1,5 @@
 //
-//  StrokeStyle.swift
+//  StrokeModifier.swift
 //  SampleAppiOS15
 //
 //  Created by Aybars Acar on 24/2/2022.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct StrokeStyle: ViewModifier {
+struct StrokeModifier: ViewModifier {
   
   @Environment(\.colorScheme) private var colorScheme
   
@@ -26,6 +26,6 @@ struct StrokeStyle: ViewModifier {
 extension View {
   
   func withStrokeStyle(cornerRadius: CGFloat = 30) -> some View {
-    self.modifier(StrokeStyle(cornerRadius: cornerRadius))
+    self.modifier(StrokeModifier(cornerRadius: cornerRadius))
   }
 }
