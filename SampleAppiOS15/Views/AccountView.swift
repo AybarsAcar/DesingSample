@@ -8,12 +8,15 @@
 import SwiftUI
 
 struct AccountView: View {
-
+  
   @Environment(\.dismiss) private var dismiss
   @AppStorage("isLogged") private var isLogged: Bool = false
-
+  
+  @ObservedObject private var coinModel = CoinModel()
+  
   @State private var isDeleted: Bool = false
   @State private var isPinned: Bool = false
+  @State private var address: Address?
   
   var body: some View {
     NavigationView {
@@ -25,6 +28,8 @@ struct AccountView: View {
         
         linkSection
         
+        coinSection
+        
         Button {
           isLogged = false
           dismiss()
@@ -32,7 +37,7 @@ struct AccountView: View {
           Text("Sign out")
         }
         .tint(.red)
-
+        
       }
       .listStyle(.insetGrouped)
       .navigationTitle("Account")
@@ -43,13 +48,21 @@ struct AccountView: View {
           } label: {
             Text("Done")
           }
-
         }
+      }
+      .task {
+        await fetchAddress()
+        await coinModel.fetchCoins()
+      }
+      .refreshable {
+        await fetchAddress()
+        await coinModel.fetchCoins()
       }
     }
   }
 }
 
+// MARK: - Components
 extension AccountView {
   
   private var profileHeaderSection: some View {
@@ -79,8 +92,13 @@ extension AccountView {
           .imageScale(.small)
           .foregroundColor(.secondary)
         
-        Text("Australia")
-          .foregroundColor(.secondary)
+        if let address = address {
+          Text(address.country)
+        }
+        else {
+          Text("Australia")
+            .foregroundColor(.secondary)
+        }
       }
     }
     .frame(maxWidth: .infinity)
@@ -163,6 +181,46 @@ extension AccountView {
       }
     }
     .tint(isPinned ? .gray : .yellow)
+  }
+  
+  private var coinSection: some View {
+    
+    Section(header: Text("Coins")) {
+      ForEach(coinModel.coins) { coin in
+        HStack {
+          AsyncImage(url: URL(string: coin.logo)) { image in
+            image
+              .resizable()
+              .aspectRatio(contentMode: .fit)
+              .frame(width: 32, height: 32)
+          } placeholder: {
+            ProgressView()
+          }
+          
+          VStack(alignment: .leading, spacing: 4) {
+            Text(coin.coinName)
+            Text(coin.acronym)
+              .font(.caption)
+              .foregroundColor(.secondary)
+          }
+        }
+      }
+    }
+  }
+}
+
+// MARK: - functions
+extension AccountView {
+  
+  // fetches a random address
+  func fetchAddress() async {
+    let url = URL(string: "https://random-data-api.com/api/address/random_address")!
+    
+    do {
+      let (data, _) = try await URLSession.shared.data(from: url)
+      address = try JSONDecoder().decode(Address.self, from: data)
+    } catch {
+    }
   }
 }
 
