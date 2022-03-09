@@ -11,7 +11,8 @@ struct AccountView: View {
   
   @Environment(\.dismiss) private var dismiss
   @AppStorage("isLogged") private var isLogged: Bool = false
-  
+  @AppStorage("isLiteMode") private var isLiteMode = true
+
   @ObservedObject private var coinModel = CoinModel()
   
   @State private var isDeleted: Bool = false
@@ -25,6 +26,13 @@ struct AccountView: View {
         profileHeaderSection
         
         menuSection
+        
+        Section {
+          Toggle(isOn: $isLiteMode) {
+            Label("Lite Mode", systemImage: isLiteMode ? "tortoise" : "hare")
+          }
+        }
+        .accentColor(.primary)
         
         linkSection
         

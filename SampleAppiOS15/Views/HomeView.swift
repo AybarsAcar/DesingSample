@@ -11,6 +11,8 @@ struct HomeView: View {
   
   @EnvironmentObject private var model: Model
   
+  @AppStorage("isLiteMode") private var isLiteMode = true
+  
   private let coordinateSpaceName: String = "scroll"
   
   @State private var hasScrolled: Bool = false
@@ -103,7 +105,7 @@ extension HomeView {
             .frame(maxWidth: .infinity)
             .padding(.vertical, 40)
             .rotation3DEffect(.degrees(minX / -20), axis: (x: 0, y: 1, z: 0))
-            .shadow(color: .shadow.opacity(0.3), radius: 10, x: 0, y: 10)
+            .shadow(color: .shadow.opacity(isLiteMode ? 0 : 0.3), radius: 10, x: 0, y: 10)
             .blur(radius: abs(minX / 60))
             .overlay(
               Image(course.image)
