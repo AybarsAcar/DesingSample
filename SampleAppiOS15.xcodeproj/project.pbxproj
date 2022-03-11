@@ -117,7 +117,6 @@
 		001337C127C76C7C00537C68 = {
 			isa = PBXGroup;
 			children = (
-				00FA9AE627CB695B009E0B8B /* SignUpView.swift */,
 				001337CC27C76C7D00537C68 /* SampleAppiOS15 */,
 				001337CB27C76C7D00537C68 /* Products */,
 			);
@@ -241,6 +240,7 @@
 		00A678BE27CCB5910082CBE9 /* Modals */ = {
 			isa = PBXGroup;
 			children = (
+				00FA9AE627CB695B009E0B8B /* SignUpView.swift */,
 				00A678BA27CCB0200082CBE9 /* ModalView.swift */,
 				00A678BC27CCB0C30082CBE9 /* SignInView.swift */,
 			);

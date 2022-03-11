@@ -13,7 +13,7 @@ struct ExploreView: View {
       Color.background
         .ignoresSafeArea()
       
-      ScrollView {
+      ScrollView(.vertical, showsIndicators: false) {
         coursesSection
         
         Text("Topics".uppercased())
