@@ -13,7 +13,19 @@ struct ExploreView: View {
       Color.background
         .ignoresSafeArea()
       
-      coursesSection
+      ScrollView {
+        coursesSection
+        
+        Text("Topics".uppercased())
+          .asTitle
+        
+        topicsSection
+        
+        Text("Popular".uppercased())
+          .asTitle
+        
+        handbooksSection
+      }
     }
     .safeAreaInset(edge: .top) {
       Color.clear.frame(height: 70)
@@ -28,7 +40,9 @@ struct ExploreView: View {
 }
 
 
+// MARK: - Components
 extension ExploreView {
+  
   var coursesSection: some View {
     ScrollView(.horizontal, showsIndicators: false) {
       HStack(spacing: 16) {
@@ -40,6 +54,27 @@ extension ExploreView {
       
       Spacer()
     }
+  }
+  
+  var handbooksSection: some View {
+    HStack(alignment: .top, spacing: 16) {
+      ForEach(handbooks) { item in
+        HandbookItem(handbook: item)
+      }
+    }
+    .padding(.horizontal, 20)
+  }
+  
+  var topicsSection: some View {
+    VStack {
+      ForEach(topics) { item in
+        ListRow(topic: item)
+      }
+    }
+    .padding(20)
+    .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 30, style: .continuous))
+    .withStrokeStyle()
+    .padding(.horizontal, 20)
   }
 }
 

@@ -24,7 +24,7 @@ struct ContentView: View {
           HomeView()
           
         case .explore:
-          AccountView()
+          ExploreView()
           
         case .notifications:
           Text("NOTIFICATIONS")
@@ -46,6 +46,7 @@ struct ContentView: View {
     .safeAreaInset(edge: .bottom, spacing: 0) {
       Color.clear.frame(height: 100)
     }
+    .dynamicTypeSize(.large ... .xxLarge)
   }
 }
 
