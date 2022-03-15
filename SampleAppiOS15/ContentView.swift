@@ -27,10 +27,10 @@ struct ContentView: View {
           ExploreView()
           
         case .notifications:
-          Text("NOTIFICATIONS")
+          NotificationsView()
           
         case .library:
-          Text("LIBRARY")
+          LibraryView()
         }
       }
       .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -41,10 +41,11 @@ struct ContentView: View {
       if showModal {
         ModalView()
           .zIndex(1)
+           
       }
     }
     .safeAreaInset(edge: .bottom, spacing: 0) {
-      Color.clear.frame(height: 100)
+      Color.clear.frame(height: 88)
     }
     .dynamicTypeSize(.large ... .xxLarge)
   }

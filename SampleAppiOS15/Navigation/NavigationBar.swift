@@ -72,6 +72,8 @@ struct NavigationBar: View {
         } content: {
           AccountView()
         }
+        .accessibilityAddTraits(.isButton)
+        .accessibilityLabel("Account")
         
       }
       .frame(maxWidth: .infinity, alignment: .trailing)

@@ -21,7 +21,7 @@ struct TabBar: View {
       
       // for small screen that doesnt have safe insets
       // we dont want corner radius for small old devices
-      let hasHomeIndicator = proxy.safeAreaInsets.bottom - 44 > 20
+      let hasHomeIndicator = proxy.safeAreaInsets.bottom - 88 > 20
       
       HStack {
         tabButtons

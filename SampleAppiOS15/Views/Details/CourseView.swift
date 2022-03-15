@@ -88,6 +88,7 @@ extension CourseView {
           .frame(maxWidth: 500)
           .matchedGeometryEffect(id: AnimationID.configure(.imageID, for: course.id.uuidString), in: namespace)
           .offset(y: scrollY > 0 ? scrollY * -0.8 : 0)
+          .accessibilityLabel("Cover Image")
       )
       .padding(20)
       .background(
